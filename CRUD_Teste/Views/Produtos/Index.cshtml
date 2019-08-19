@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CRUD_Teste.Models.Produto>
+
+@{ 
+    ViewBag.Title = "Index";
+}
+
+<h2>Produtos</h2>
+<!-- Link para adicionar novo produto -->
+<p>
+    @Html.ActionLink("Incluir Novo Produto", "Create", "Produtos", new { @class = "btn btn-success"})
+</p>
+
+<!-- Tabela de produtos -->
+<table class="table">
+    <!-- Cabeçalho da tabela -->
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Categoria.CategoriaNome)</th>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+        <th>@Html.DisplayNameFor(model => model.Preco)</th>
+        <th></th>
+    </tr>
+
+    <!-- Percorre os itens cadastrados no banco de dados e preenche a tabela -->
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.Preco)</td>
+            <!-- Inclui na última coluna links para editar, ver detalhes e deletar um produto, 
+                passando o id do produto -->
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ProdutoId }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.ProdutoId }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.ProdutoId })
+            </td>
+        </tr>
+    }
+</table>
